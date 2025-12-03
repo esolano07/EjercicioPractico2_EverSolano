@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fragmentos</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+
+<body>
+    <header th:fragment="header">
+        <div class="logo-texto">
+            <span class="nombre-empresa">Ejercicio Practico 2 - Ever Solano</span>
+        </div>
+        <div class="boton">
+            <a th:href="@{/}" class="button-index">Inicio</a>
+            <a class="button-config">Configuracion</a>
+            <a class="button-logout">Cerrar sesion</a>
+        </div>
+    </header>
+
+    <footer th:fragment="footer">
+        &copy; Ejercicio Practico 2 - Ever Solano.
+    </footer>
+</body>
+
+</html>

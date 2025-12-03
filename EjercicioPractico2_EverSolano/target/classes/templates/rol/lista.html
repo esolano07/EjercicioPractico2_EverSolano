@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rol - Lista</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+
+<body>
+
+<div th:replace="fragmentos :: header"></div>
+
+<div class="container">
+
+    <a th:href="@{/}" class="btn-module btn-small" style="background-color: gray;">Volver al menú principal</a>
+    <h1>Lista de Roles</h1>
+    <a th:href="@{/rol/nuevo}" class="btn-module">Nuevo Rol</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="rol : ${roles}">
+                <td th:text="${rol.nombre}"></td>
+                <td th:text="${rol.descripcion}"></td>
+
+                <td>
+                    <a th:href="@{|/rol/editar/${rol.id}|}" class="btn-module btn-small">Editar</a>
+                    <a th:href="@{|/rol/eliminar/${rol.id}|}" class="btn-module btn-small">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div th:replace="fragmentos :: footer"></div>
+
+</body>
+
+</html>

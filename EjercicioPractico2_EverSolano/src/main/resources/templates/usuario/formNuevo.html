@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Usuario - Formulario</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+
+<body>
+<div th:replace="fragmentos :: header"></div>
+
+<div class="container">
+    
+    <h1 th:text="${usuario.id != null} ? 'Editar Usuario' : 'Nuevo Usuario'"></h1>
+
+    <form th:action="@{/usuario/guardar}" th:object="${usuario}" method="post">
+
+        <!-- Campo oculto para editar -->
+        <input type="hidden" th:field="*{id}"/>
+
+        <div>
+            <label>Nombre:</label><br>
+            <input type="text" th:field="*{nombre}" required maxlength="150"
+                   style="width: 100%; padding: 8px; margin: 10px 0;">
+        </div>
+
+        <div>
+            <label>Apellido:</label><br>
+            <input type="text" th:field="*{apellido}" required maxlength="150"
+                   style="width: 100%; padding: 8px; margin: 10px 0;">
+        </div>
+
+        <div>
+            <label>Correo Electrónico:</label><br>
+            <input type="email" th:field="*{email}" required maxlength="200"
+                   style="width: 100%; padding: 8px; margin: 10px 0;">
+        </div>
+
+        <div>
+            <label>Contraseña:</label><br>
+            <input type="password" th:field="*{password}" required
+                   style="width: 100%; padding: 8px; margin: 10px 0;">
+        </div>
+
+        <div>
+            <label>Activo:</label><br>
+            <input type="checkbox" th:field="*{activo}">
+        </div>
+
+        <div>
+            <label>Rol:</label><br>
+            <select name="rolId" required
+                    style="width: 100%; padding: 8px; margin: 10px 0;">
+                <option value="">Seleccione un rol</option>
+
+                <option th:each="rol : ${roles}"
+                        th:value="${rol.id}"
+                        th:text="${rol.descripcion}">
+                </option>
+            </select>
+        </div>
+
+        <div>
+            <button type="submit" class="btn-module" style="background-color: #007bff;">Guardar</button>
+            <a th:href="@{/usuario}" class="btn-module" style="background-color: gray;">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<div th:replace="fragmentos :: footer"></div>
+
+</body>
+</html>

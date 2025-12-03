@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Consultas de Usuarios</title>
+        <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    </head>
+
+    <body>
+
+        <div th:replace="fragmentos :: header"></div>
+
+        <div class="container">
+
+            <h1>Consultas de Usuarios</h1>
+
+            <form th:action="@{/usuario/consultas}" method="get">
+
+                <label>Filtrar por Rol:</label>
+                <select name="idRol" style="padding: 8px; width: 250px;">
+                    <option value="">-- Ver todos --</option>
+
+                    <option th:each="rol : ${roles}"
+                            th:value="${rol.id}"
+                            th:text="${rol.nombre + ' - ' + rol.descripcion}">
+                    </option>
+                </select>
+
+                <button type="submit" class="btn-module">Buscar</button>
+                <a th:href="@{/usuario/consultas}" class="btn-module" style="background-color: gray;">Limpiar</a>
+            </form>
+
+            <hr>
+
+            <div style="margin: 20px 0;">
+                <strong>Usuarios activos:</strong> <span th:text="${activos}"></span><br>
+                <strong>Usuarios inactivos:</strong> <span th:text="${inactivos}"></span>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo</th>
+                        <th>Rol</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="usuario : ${usuarios}">
+                        <td th:text="${usuario.nombre}"></td>
+                        <td th:text="${usuario.apellido}"></td>
+                        <td th:text="${usuario.email}"></td>
+
+
+                        <td th:text="${usuario.rol.nombre + ' - ' + usuario.rol.descripcion}"></td>
+
+                        <td th:text="${usuario.activo ? 'Activo' : 'Inactivo'}"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div th:replace="fragmentos :: footer"></div>
+
+    </body>
+</html>

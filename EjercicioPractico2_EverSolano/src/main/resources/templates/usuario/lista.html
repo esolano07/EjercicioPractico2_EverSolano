@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Usuario - Lista</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+
+<body>
+
+<div th:replace="fragmentos :: header"></div>
+
+<div class="container">
+
+    <a th:href="@{/}" class="btn-module btn-small" style="background-color: gray;">Volver al menú principal</a>
+    <h1>Lista de Usuarios</h1>
+    <a th:href="@{/usuario/nuevo}" class="btn-module">Nuevo Usuario</a>
+    
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="usuario : ${usuarios}">
+                <td th:text="${usuario.nombre}"></td>
+                <td th:text="${usuario.apellido}"></td>
+                <td th:text="${usuario.email}"></td>
+                <td th:text="${usuario.rol.descripcion}"></td>
+
+                <td>
+                    <a th:href="@{|/usuario/editar/${usuario.id}|}" class="btn-module btn-small">Editar</a>
+                    <a th:href="@{|/usuario/eliminar/${usuario.id}|}" class="btn-module btn-small">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div th:replace="fragmentos :: footer"></div>
+
+</body>
+
+</html>
